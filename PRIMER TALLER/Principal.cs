@@ -1,51 +1,73 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace PRIMER_TALLER
 {
 
     class Principal
     {
-
+        static Cliente cliente = new Cliente();
         static void Main(string[] args)
         {
+
             MenuPrincipal();
         }
         static public void MenuPrincipal()
         {
             int opcion;
-            Console.Clear();
-            Console.WriteLine("PRIMER TALLER.");
-            Console.WriteLine("1.Primer ejercicio.");
-            Console.WriteLine("2.Segundo ejercicio.");
-            Console.WriteLine("3.Tecer ejercicio");
-            opcion = Convert.ToInt32(Console.ReadLine());
-            switch (opcion)
+            do
             {
-                case 1: PrimerEjercicio(); break;
-                case 2: SegundoEjercicio(); break;
-                case 3: TercerEjercicio(); break;
-                default: Console.WriteLine("Digite una opcion correcta."); break;
-            }
+                Console.Clear();
+                Console.WriteLine("PRIMER TALLER.");
+                Console.WriteLine("1.Primer ejercicio.");
+                Console.WriteLine("2.Segundo ejercicio.");
+                Console.WriteLine("3.Tecer ejercicio");
+                Console.WriteLine("4.Salir");
+                opcion = Convert.ToInt32(Console.ReadLine());
+                switch (opcion)
+                {
+                    case 1: PrimerEjercicio(); break;
+                    case 2: SegundoEjercicio(); break;
+                    case 3: cliente = TercerEjercicio(); break;
+                    case 4: Environment.Exit(0);break;
+                    default: Console.WriteLine("Digite una opcion correcta");Console.ReadKey();break;
+                }
+            } while (opcion != 4);
+            Console.WriteLine("Pulse enter para salir.");
+            Console.ReadKey();
 
         }
         static private void PrimerEjercicio()
         {
+            Console.Clear();
             string seguir;
             seguir = "S";
             while (seguir.ToUpper() == "S")
             {
-                Estudiante estudiante = new Estudiante();
-                Console.WriteLine("Digite la primera nota: \n");
-                estudiante.Nota1 = Convert.ToDecimal(Console.ReadLine());
-                Console.WriteLine("Digite la segunda nota: \n");
-                estudiante.Nota2 = Convert.ToDecimal(Console.ReadLine());
-                Console.WriteLine("Digite la tercera nota: \n");
-                estudiante.Nota3 = Convert.ToDecimal(Console.ReadLine());
-                estudiante.CalcularPromedio();
-                Console.WriteLine("El promedio del estudiante es de: " + estudiante.Promedio);
-                Console.WriteLine("El estudiante " + estudiante.ValidarEstado());
-                Console.WriteLine("¿Desea continuar?S/N");
-                seguir = Console.ReadLine();
+                try
+                {
+                    Estudiante estudiante = new Estudiante();
+                    Console.WriteLine("Digite la primera nota: \n");
+                    estudiante.Nota1 = Convert.ToDecimal(Console.ReadLine());
+
+                    Console.WriteLine("Digite la segunda nota: \n");
+                    estudiante.Nota2 = Convert.ToDecimal(Console.ReadLine());
+                    Console.WriteLine("Digite la tercera nota: \n");
+                    estudiante.Nota3 = Convert.ToDecimal(Console.ReadLine());
+                    estudiante.CalcularPromedio();
+
+                    Console.WriteLine("El promedio del estudiante es de: " + estudiante.Promedio);
+                    Console.WriteLine("El estudiante " + estudiante.ValidarEstado());
+                    Console.WriteLine("¿Desea continuar?S/N");
+                    seguir = Console.ReadLine();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("POR FAVOR SOLO DIGITE NUMEROS.");
+                    Console.WriteLine("Presione enter para continuar.");
+                    Console.ReadKey();
+
+                }
                 Console.Clear();
             }
             Console.Clear();
@@ -53,6 +75,7 @@ namespace PRIMER_TALLER
         }
         static private void SegundoEjercicio()
         {
+            Console.Clear();
             string seguir;
             seguir = "S";
             Persona persona = new Persona();
@@ -81,13 +104,14 @@ namespace PRIMER_TALLER
             MenuPrincipal();
         }
 
-        static private void TercerEjercicio()
+        static private Cliente TercerEjercicio()
         {
+            Console.Clear();
             string Seguir;
             Seguir = "S";
-            Cliente cliente = new Cliente();
-            while (Seguir.ToUpper() == "S")
-            {
+
+
+            MenuCliente menucliente = new MenuCliente();
                 Console.WriteLine("Digite su nombre: ");
                 cliente.Nombre = Console.ReadLine();
                 Console.WriteLine("Digite su numero de cuenta");
@@ -96,9 +120,9 @@ namespace PRIMER_TALLER
                 cliente.SaldoApertura = Convert.ToDecimal(Console.ReadLine());
                 cliente.SaldoTotal = cliente.SaldoApertura;
                 Console.Clear();
-                cliente.MenuFinanciero();
+                menucliente.MenuFinanciero(cliente);
                 Console.ReadKey();
-            }
+            return cliente;
 
         }
 

@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Cliente.cs" />
     <Compile Include="Estudiante.cs" />
+    <Compile Include="MenuCliente.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Principal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

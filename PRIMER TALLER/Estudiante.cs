@@ -17,7 +17,9 @@ namespace PRIMER_TALLER
         public decimal Promedio { get; set; }
         public string Estado { get; set; }
 
+        
         public void CalcularPromedio() {
+           
             Promedio = ((Nota1 + Nota2 + Nota3) / 3);
       
         }
